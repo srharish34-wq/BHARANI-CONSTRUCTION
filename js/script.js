@@ -39,13 +39,22 @@ modal.onclick = e => e.target === modal && closeModal();
 addEventListener('keydown', e => e.key === 'Escape' && closeModal());
 setInterval(() => { if (!modal.classList.contains('open')) openModal(); }, POPUP_EVERY_MS);
 
-$('#enqForm').onsubmit = e => {
+$('#enqForm').addEventListener('submit', function(e) {
   e.preventDefault();
+
   const f = new FormData(e.target);
-  const text = `*New Enquiry – Bharani Website*%0AName: ${enc(f.get('name'))}%0APhone: ${enc(f.get('phone'))}%0AService: ${enc(f.get('service'))}%0AMessage: ${enc(f.get('msg') || '-')}`;
-  window.open(`https://wa.me/${WA}?text=${text}`, '_blank', 'noopener');
-  e.target.reset(); closeModal();
-};
+
+  const message = `*New Enquiry – Bharani Website*
+
+Name: ${f.get('name')}
+Phone: ${f.get('phone')}
+Service: ${f.get('service')}
+Message: ${f.get('msg') || '-'}`;
+
+  const url = `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
+
+  window.location.href = url;
+});
 const enc = v => encodeURIComponent(v);
 
 /* cost calculator */
