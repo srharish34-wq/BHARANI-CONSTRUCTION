@@ -1,5 +1,33 @@
 const WA = '919600647468';            // client WhatsApp number
 const POPUP_EVERY_MS = 60000;         // enquiry popup interval (1 minute)
+
+/* WHATSAPP ENQUIRY FORM */
+document.addEventListener('submit', function(e) {
+  if (e.target.id !== 'enqForm') return;
+
+  e.preventDefault();
+
+  const form = e.target;
+
+  const name = form.elements['name'].value.trim();
+  const phone = form.elements['phone'].value.trim();
+  const service = form.elements['service'].value;
+  const msg = form.elements['msg'].value.trim() || '-';
+
+  const message = `New Enquiry - Bharani Engineers
+
+Name: ${name}
+Customer Phone: ${phone}
+Service: ${service}
+Requirement: ${msg}`;
+
+  const whatsappURL =
+    'https://wa.me/919600647468?text=' +
+    encodeURIComponent(message);
+
+  window.location.assign(whatsappURL);
+});
+
 const $ = (s, r = document) => r.querySelector(s);
 const inr = n => '₹' + Math.round(n).toLocaleString('en-IN');
 
@@ -39,22 +67,7 @@ modal.onclick = e => e.target === modal && closeModal();
 addEventListener('keydown', e => e.key === 'Escape' && closeModal());
 setInterval(() => { if (!modal.classList.contains('open')) openModal(); }, POPUP_EVERY_MS);
 
-$('#enqForm').addEventListener('submit', function(e) {
-  e.preventDefault();
 
-  const f = new FormData(e.target);
-
-  const message = `*New Enquiry – Bharani Website*
-
-Name: ${f.get('name')}
-Phone: ${f.get('phone')}
-Service: ${f.get('service')}
-Message: ${f.get('msg') || '-'}`;
-
-  const url = `https://wa.me/${WA}?text=${encodeURIComponent(message)}`;
-
-  window.location.href = url;
-});
 const enc = v => encodeURIComponent(v);
 
 /* cost calculator */
