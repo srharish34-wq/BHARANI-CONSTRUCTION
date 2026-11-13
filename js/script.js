@@ -1,4 +1,4 @@
-const WA = '919361703989';            // client WhatsApp number
+const WA = '919600647468';            // client WhatsApp number
 const POPUP_EVERY_MS = 60000;         // enquiry popup interval (1 minute)
 const $ = (s, r = document) => r.querySelector(s);
 const inr = n => '₹' + Math.round(n).toLocaleString('en-IN');
