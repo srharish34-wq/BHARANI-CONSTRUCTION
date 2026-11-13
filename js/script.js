@@ -25,7 +25,7 @@ Requirement: ${msg}`;
     'https://wa.me/919600647468?text=' +
     encodeURIComponent(message);
 
-  window.location.assign(whatsappURL);
+  window.open(whatsappURL, '_blank');
 });
 
 const $ = (s, r = document) => r.querySelector(s);
